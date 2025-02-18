@@ -19,10 +19,11 @@
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-|  Title      |       ProjectTitle     |
+|  Title      |       ClimaCloset - Weather Based Outfit Suggestion App     |
 | System URL  |      link_to_system    |
 | Video Link  |      link_to_video     |
 
 ## Project Summary
 
-This is a summary of the project!
+Our team is planning to develop ClimaCloset, an application that provides personalized outfit recommendations to its users based on real weather data. Users will be able to create an account where they can input a variety of clothing items within their wardrobe. From there, users will be able to receive daily outfit suggestions tailored to past and current weather data based on their location.
+	By utilizing datasets based on weather data, along with user provided clothing options, the app will help to simplify the outfit planning process by suggesting the best attire for different weather conditions. This project combines many elements including weather datasets, user login and personalization, and a smart recommendation algorithm to improve and simplify the user experience.
