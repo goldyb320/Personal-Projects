@@ -8,14 +8,17 @@
 
   <div>
     <form action="/clothing" method="GET">
-      <input type="hidden" name="userId" value="<%= user.userId %>" />
+      <input type="hidden" name="userId" value="<%= userId %>" />
       <button type="submit">Clothing Items</button>
     </form>
+
     <form action="/outfits" method="GET">
+      <input type="hidden" name="userId" value="<%= userId %>" />
       <button type="submit">Outfits</button>
     </form>
+
     <form action="/account" method="GET">
-      <input type="hidden" name="userId" value="<%= user.userId %>" />
+      <input type="hidden" name="userId" value="<%= userId %>" />
       <button type="submit">Account</button>
     </form>
   </div>
