@@ -23,40 +23,40 @@ router.post('/login', function (req, res) {
     }
 
     const user = results[0];
-    req.session.userId = user.userId;
-    res.redirect('/dashboard'); // 🔁 Now goes to dashboard first!
+    req.user = user; // Store in request for session workaround
+    res.render('dashboard', { user });
   });
 });
 
-// GET dashboard
+// Dashboard navigation routes
 router.get('/dashboard', (req, res) => {
-  if (!req.session.userId) {
-    return res.redirect('/');
-  }
-
   res.render('dashboard');
 });
 
-// Navigation buttons
 router.get('/clothing', (req, res) => {
-  if (!req.session.userId) {
-    return res.redirect('/');
+  // Pull userId from query for now
+  const userId = req.query.userId;
+  if (!userId) {
+    return res.render('clothing', { items: [], error: 'User not authenticated' });
   }
-  res.render('clothing');
+
+  const query = 'SELECT name, type, style, color FROM clothingItems WHERE userId = ?';
+  db.query(query, [userId], (err, results) => {
+    if (err) {
+      return res.render('clothing', { items: [], error: 'Database error' });
+    }
+    res.render('clothing', { items: results, error: null });
+  });
 });
 
 router.get('/outfits', (req, res) => {
-  if (!req.session.userId) {
-    return res.redirect('/');
-  }
   res.render('outfits');
 });
 
 router.get('/account', (req, res) => {
-  const userId = req.session.userId;
-
+  const userId = req.query.userId;
   if (!userId) {
-    return res.redirect('/');
+    return res.render('account', { user: null, error: 'User not authenticated' });
   }
 
   const query = 'SELECT * FROM users WHERE userId = ?';

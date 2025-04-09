@@ -7,9 +7,17 @@
   <h1>Welcome to ClimaCloset</h1>
 
   <div>
-    <a href="/clothing"><button>Clothing Items</button></a>
-    <a href="/outfits"><button>Outfits</button></a>
-    <a href="/account"><button>Account</button></a>
+    <form action="/clothing" method="GET">
+      <input type="hidden" name="userId" value="<%= user.userId %>" />
+      <button type="submit">Clothing Items</button>
+    </form>
+    <form action="/outfits" method="GET">
+      <button type="submit">Outfits</button>
+    </form>
+    <form action="/account" method="GET">
+      <input type="hidden" name="userId" value="<%= user.userId %>" />
+      <button type="submit">Account</button>
+    </form>
   </div>
 </body>
 </html>

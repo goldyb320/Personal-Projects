@@ -5,5 +5,22 @@
 </head>
 <body>
   <h1>Clothing Items</h1>
+
+  <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } else if (items.length === 0) { %>
+    <p>No clothing items found.</p>
+  <% } else { %>
+    <ul>
+      <% items.forEach(item => { %>
+        <li>
+          <strong>Name:</strong> <%= item.name %> |
+          <strong>Type:</strong> <%= item.type %> |
+          <strong>Style:</strong> <%= item.style %> |
+          <strong>Color:</strong> <%= item.color %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
 </body>
 </html>
