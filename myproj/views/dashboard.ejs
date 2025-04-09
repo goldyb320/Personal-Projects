@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Welcome to the Dashboard</h1>
+
+  <form action="/users/get" method="POST">
+    <label for="userId">Enter User ID:</label>
+    <input type="text" id="userId" name="userId" required>
+    <button type="submit">Get User Info</button>
+  </form>
+
+  <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } %>
+
+  <% if (user) { %>
+    <h2>User Info:</h2>
+    <ul>
+      <li><strong>User ID:</strong> <%= user.userId %></li>
+      <li><strong>Username:</strong> <%= user.username %></li>
+      <li><strong>Password:</strong> <%= user.password %></li>
+      <li><strong>First Name:</strong> <%= user.firstName %></li>
+      <li><strong>Last Name:</strong> <%= user.lastName %></li>
+      <li><strong>Address:</strong> <%= user.address %></li>
+      <li><strong>Location:</strong> <%= user.location %></li>
+    </ul>
+  <% } %>
+</body>
+</html>
