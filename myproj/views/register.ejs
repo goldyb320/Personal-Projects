@@ -11,6 +11,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
+      position: relative;
     }
 
     .register-box {
@@ -54,6 +55,25 @@
       color: red;
       margin-top: 0.5rem;
     }
+
+    .bottom-right {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    .btn-back {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-back:hover {
+      background-color: #2563eb;
+    }
   </style>
 </head>
 <body>
@@ -73,6 +93,12 @@
     <% if (error) { %>
       <p class="error"><%= error %></p>
     <% } %>
+  </div>
+
+  <div class="bottom-right">
+    <form action="/" method="GET">
+      <button class="btn-back" type="submit">Back</button>
+    </form>
   </div>
 </body>
 </html>
