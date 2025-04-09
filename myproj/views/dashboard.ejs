@@ -2,24 +2,63 @@
 <html>
 <head>
   <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+
+    .top-right {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem 0;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #2563eb;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to ClimaCloset</h1>
+  <div class="top-right">
+    <form action="/" method="GET">
+      <button class="btn" type="submit">Sign Out</button>
+    </form>
+  </div>
 
-  <div>
+  <h1 style="text-align: center;">Welcome to ClimaCloset</h1>
+
+  <div class="nav-buttons">
     <form action="/clothing" method="GET">
       <input type="hidden" name="userId" value="<%= userId %>" />
-      <button type="submit">Clothing Items</button>
+      <button class="btn" type="submit">Clothing Items</button>
     </form>
 
     <form action="/outfits" method="GET">
       <input type="hidden" name="userId" value="<%= userId %>" />
-      <button type="submit">Outfits</button>
+      <button class="btn" type="submit">Outfits</button>
     </form>
 
     <form action="/account" method="GET">
       <input type="hidden" name="userId" value="<%= userId %>" />
-      <button type="submit">Account</button>
+      <button class="btn" type="submit">Account</button>
     </form>
   </div>
 </body>

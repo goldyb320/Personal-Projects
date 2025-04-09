@@ -73,8 +73,44 @@ router.get('/clothing', (req, res) => {
 // GET outfits page
 router.get('/outfits', (req, res) => {
   const userId = req.query.userId;
-  res.render('outfits', { userId });
+  if (!userId) {
+    return res.render('outfits', {
+      outfits: [],
+      error: 'User not authenticated',
+      userId: null
+    });
+  }
+
+  const query = `
+    SELECT o.outfitId, o.outfitStyle,
+           t1.name AS top1, t2.name AS top2, b.name AS bottom
+    FROM outfits o
+    JOIN clothingItems t1 ON o.topLayer1 = t1.clothingId
+    LEFT JOIN clothingItems t2 ON o.topLayer2 = t2.clothingId
+    JOIN clothingItems b ON o.bottom = b.clothingId
+    WHERE t1.userId = ? AND (t2.userId = ? OR t2.userId IS NULL) AND b.userId = ?
+    ORDER BY o.outfitStyle ASC;
+  `;
+
+  db.query(query, [userId, userId, userId], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.render('outfits', {
+        outfits: [],
+        error: 'Database error',
+        userId
+      });
+    }
+
+    // ✅ Always pass outfits and userId, even if no results
+    res.render('outfits', {
+      outfits: results || [],
+      error: null,
+      userId
+    });
+  });
 });
+
 
 // GET account page
 router.get('/account', (req, res) => {

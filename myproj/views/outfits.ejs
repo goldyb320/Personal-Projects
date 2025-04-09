@@ -3,6 +3,11 @@
 <head>
   <title>Outfits</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+
     .top-right {
       position: absolute;
       top: 10px;
@@ -14,21 +19,62 @@
       bottom: 10px;
       right: 10px;
     }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #2563eb;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
   </style>
 </head>
 <body>
   <div class="top-right">
     <form action="/" method="GET">
-      <button type="submit">Sign Out</button>
+      <button class="btn" type="submit">Sign Out</button>
     </form>
   </div>
 
   <h1>Outfits</h1>
 
+  <% if (typeof error !== 'undefined' && error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } else if (outfits.length === 0) { %>
+    <p>No outfits found.</p>
+  <% } else { %>
+    <ul>
+      <% outfits.forEach(outfit => { %>
+        <li>
+          <strong>Style:</strong> <%= outfit.outfitStyle %><br>
+          <strong>Top Layer 1:</strong> <%= outfit.top1 %><br>
+          <strong>Top Layer 2:</strong> <%= outfit.top2 ? outfit.top2 : "Nothing" %><br>
+          <strong>Bottom:</strong> <%= outfit.bottom %>
+        </li>
+      <% }) %>      
+    </ul>
+  <% } %>
+
   <div class="bottom-right">
     <form action="/dashboard" method="GET">
       <input type="hidden" name="userId" value="<%= userId %>">
-      <button type="submit">Dashboard</button>
+      <button class="btn" type="submit">Dashboard</button>
     </form>
   </div>
 </body>
