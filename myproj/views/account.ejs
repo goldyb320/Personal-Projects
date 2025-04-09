@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Account</title>
+</head>
+<body>
+  <div style="text-align: right;">
+    <form action="/" method="GET">
+      <button type="submit">Sign Out</button>
+    </form>
+  </div>
+
+  <h1>Account Info</h1>
+
+  <% if (user) { %>
+    <h2>User Info:</h2>
+    <ul>
+      <li><strong>User ID:</strong> <%= user.userId %></li>
+      <li><strong>Username:</strong> <%= user.username %></li>
+      <li><strong>Password:</strong> <%= user.password %></li>
+      <li><strong>First Name:</strong> <%= user.firstName %></li>
+      <li><strong>Last Name:</strong> <%= user.lastName %></li>
+      <li><strong>Address:</strong> <%= user.address %></li>
+      <li><strong>Location:</strong> <%= user.location %></li>
+    </ul>
+
+    <form action="/users/update-location" method="POST">
+      <label for="location">Update Location:</label>
+      <input type="text" name="location" required>
+      <input type="hidden" name="userId" value="<%= user.userId %>">
+      <button type="submit">Update</button>
+    </form>
+  <% } else { %>
+    <p>User data not found.</p>
+  <% } %>
+
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+</body>
+</html>

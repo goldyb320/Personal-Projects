@@ -2,36 +2,22 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// POST /users/get
-router.post('/get', (req, res) => {
-  const userId = req.body.userId;
-
-  db.query('SELECT * FROM users WHERE userId = ?', [userId], (err, results) => {
-    if (err) {
-      return res.status(500).render('dashboard', { error: 'Database error', user: null });
-    }
-    if (results.length === 0) {
-      return res.status(404).render('dashboard', { error: 'User not found', user: null });
-    }
-    res.render('dashboard', { user: results[0], error: null });
-  });
-});
-
-// POST /users/update-location
+// POST to update user location
 router.post('/update-location', (req, res) => {
-  const { userId, newLocation } = req.body;
+  const { userId, location } = req.body;
 
-  db.query('UPDATE users SET location = ? WHERE userId = ?', [newLocation, userId], (err) => {
+  db.query('UPDATE users SET location = ? WHERE userId = ?', [location, userId], (err, results) => {
     if (err) {
-      return res.status(500).render('dashboard', { error: 'Failed to update location', user: null });
+      return res.render('account', { user: null, error: 'Failed to update location.' });
     }
 
-    // Fetch updated user info
-    db.query('SELECT * FROM users WHERE userId = ?', [userId], (err2, results) => {
-      if (err2 || results.length === 0) {
-        return res.status(500).render('dashboard', { error: 'Error fetching updated user info', user: null });
+    // Fetch updated user
+    db.query('SELECT * FROM users WHERE userId = ?', [userId], (err2, updated) => {
+      if (err2 || updated.length === 0) {
+        return res.render('account', { user: null, error: 'Error fetching updated user info.' });
       }
-      res.render('dashboard', { user: results[0], error: null });
+
+      res.render('account', { user: updated[0], error: null });
     });
   });
 });
