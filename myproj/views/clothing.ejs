@@ -70,6 +70,13 @@
 
   <h1>Clothing Items</h1>
 
+  <form action="/search-clothing" method="POST" style="margin-bottom: 1em;">
+    <input type="hidden" name="userId" value="<%= userId %>">
+    <input type="text" name="keyword" placeholder="Search your clothes..." required>
+    <button type="submit">Search</button>
+  </form>
+  
+
   <% if (error) { %>
     <p style="color: red;"><%= error %></p>
   <% } else if (items.length === 0) { %>

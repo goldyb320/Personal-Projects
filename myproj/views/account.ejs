@@ -61,7 +61,6 @@
       </ul>
     </div>
 
-    <!-- Change Location -->
     <form action="/users/update-location" method="POST">
       <input type="hidden" name="userId" value="<%= user.userId %>" />
       <label for="location">Update Location:</label>
@@ -69,7 +68,6 @@
       <button class="btn" type="submit">Change Location</button>
     </form>
 
-    <!-- Delete Account -->
     <form action="/users/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this account?');">
       <input type="hidden" name="userId" value="<%= user.userId %>" />
       <button class="btn" type="submit" style="background-color: #ef4444;">Delete Account</button>
