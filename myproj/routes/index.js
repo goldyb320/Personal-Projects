@@ -26,6 +26,7 @@ router.get('/register', (req, res) => {
   res.render('register', { error: null });
 });
 
+//register a new user
 router.post('/register', (req, res) => {
   const { username, password, firstName, lastName, address, location } = req.body;
 
@@ -214,6 +215,7 @@ router.post('/delete-clothing', (req, res) => {
   });
 });
 
+//outfits page, displays our outfits using query
 router.get('/outfits', (req, res) => {
   const userId = req.query.userId;
   if (!userId) {
@@ -320,6 +322,7 @@ router.get('/recommendation', (req, res) => {
   });
 });
 
+//gegts the account page with accound info (user info)
 router.get('/account', (req, res) => {
   const userId = req.query.userId;
   if (!userId) return res.redirect('/');
@@ -335,7 +338,7 @@ router.get('/account', (req, res) => {
   });
 });
 
-
+//deletes the account
 router.post('/delete-account', (req, res) => {
   const userId = req.body.userId;
 
@@ -349,6 +352,7 @@ router.post('/delete-account', (req, res) => {
   });
 });
 
+//location updater
 router.post('/update-location', (req, res) => {
   const { userId, location } = req.body;
 
@@ -367,7 +371,7 @@ router.post('/update-location', (req, res) => {
   });
 });
 
-
+//restuaraunts page
 router.get('/restaurants', (req, res) => {
   const userId = req.query.userId;
   if (!userId) return res.redirect('/');
