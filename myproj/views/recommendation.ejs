@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recommended Outfit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      text-align: center;
+    }
+    .btn {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Your Recommended Outfit</h1>
+
+  <% if (recommendedOutfit) { %>
+    <p><strong>Top Layer 1:</strong> <%= recommendedOutfit.topLayer1_name %></p>
+    <p><strong>Top Layer 2:</strong> <%= recommendedOutfit.topLayer2_name ? recommendedOutfit.topLayer2_name : "Nothing" %></p>
+    <p><strong>Bottom:</strong> <%= recommendedOutfit.bottom_name %></p>
+    <p><strong>Outfit Style:</strong> <%= recommendedOutfit.outfitStyle %></p>
+    <p><strong>Today's Average Temperature:</strong> <%= recommendedOutfit.dailyAvg %>°F</p>
+    <p><strong>Location:</strong> <%= recommendedOutfit.location %></p>
+  <% } else { %>
+    <p>No outfit recommendation available.</p>
+  <% } %>
+
+  <% if (restaurants && restaurants.length > 0) { %>
+    <h2 style="text-align: center; margin-top: 3rem;">Top 3 Restaurants Near You</h2>
+    <ul style="list-style-type: none; padding: 0; max-width: 800px; margin: 2rem auto 0;">
+      <% restaurants.forEach(restaurant => { %>
+        <li style="background: white; padding: 1rem; margin-bottom: 1rem; border-radius: 6px; box-shadow: 0 0 4px rgba(0,0,0,0.1);">
+          <strong>Name:</strong> <%= restaurant.name %> <br>
+          <strong>Location:</strong> <%= restaurant.location %> <br>
+          <strong>Phone:</strong> <%= restaurant.phone %> <br>
+          <strong>Rating:</strong> <%= restaurant.rate %> ⭐<br>
+          <strong>Type:</strong> <%= restaurant.rest_type %> <br>
+          <strong>Online Order:</strong> <%= restaurant.online_order ? 'Yes' : 'No' %> <br>
+          <strong>Book Table:</strong> <%= restaurant.book_table ? 'Yes' : 'No' %> <br>
+          <% if (restaurant.url) { %>
+            <a href="<%= restaurant.url %>" target="_blank">Visit Website</a>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p style="text-align: center;">No restaurants available near you.</p>
+  <% } %>  
+
+  <div style="margin-top: 2rem;">
+    <form action="/dashboard" method="GET">
+      <input type="hidden" name="userId" value="<%= userId %>">
+      <button class="btn" type="submit">Back to Dashboard</button>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -30,6 +30,22 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  .closet-image {
+    width: 250px;
+    height: auto;
+    animation: fadeSlideIn 1s ease-out forwards;
+  }
 
     .btn:hover {
       background-color: #2563eb;
@@ -50,16 +66,43 @@
       <input type="hidden" name="userId" value="<%= userId %>" />
       <button class="btn" type="submit">Clothing Items</button>
     </form>
-
+  
     <form action="/outfits" method="GET">
       <input type="hidden" name="userId" value="<%= userId %>" />
       <button class="btn" type="submit">Outfits</button>
     </form>
 
+    <form action="/restaurants" method="GET">
+      <input type="hidden" name="userId" value="<%= userId %>">
+      <button class="btn" type="submit">Restaurants</button>
+    </form> 
+  
     <form action="/account" method="GET">
       <input type="hidden" name="userId" value="<%= userId %>" />
       <button class="btn" type="submit">Account</button>
+    </form>   
+  </div>
+
+  <% if (weatherInfo) { %>
+    <p style="text-align: center; font-size: 1.2rem; margin-top: 2rem;"><%= weatherInfo %></p>
+  <% } %>
+
+  <% if (avgTempInfo) { %>
+    <p style="text-align: center; font-size: 1.2rem; margin-top: 1rem;"><%= avgTempInfo %></p>
+  <% } %>  
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <form action="/recommendation" method="GET">
+      <input type="hidden" name="userId" value="<%= userId %>" />
+      <button class="btn" style="padding: 1rem 2.5rem; font-size: 1.3rem;" type="submit">
+        Recommend an Outfit
+      </button>
     </form>
   </div>
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <img src="https://cdn-icons-png.flaticon.com/512/2337/2337984.png" alt="Closet Logo" class="closet-image">
+  </div>  
+
 </body>
 </html>

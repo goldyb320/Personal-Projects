@@ -70,12 +70,42 @@
 
   <h1>Clothing Items</h1>
 
-  <form action="/search-clothing" method="POST" style="margin-bottom: 1em;">
+  <% if (counts) { %>
+    <div style="margin-bottom: 1rem; font-size: 1.2rem; display: flex; justify-content: center; gap: 2rem;">
+      <p><strong>Outer Layers:</strong> <%= counts.outer_layer_count %></p>
+      <p><strong>Inner Layers:</strong> <%= counts.inner_layer_count %></p>
+      <p><strong>Lower Layers:</strong> <%= counts.lower_layer_count %></p>
+    </div>
+  <% } %>  
+
+<div style="text-align: center; margin-bottom: 2rem;">
+  <form action="/add-clothing" method="POST" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1rem;">
     <input type="hidden" name="userId" value="<%= userId %>">
-    <input type="text" name="keyword" placeholder="Search your clothes..." required>
-    <button type="submit">Search</button>
+
+    <input type="text" name="name" placeholder="Name" required style="padding: 0.5rem;">
+    <input type="text" name="type" placeholder="Type" required style="padding: 0.5rem;">
+    <input type="text" name="style" placeholder="Style" required style="padding: 0.5rem;">
+    <input type="text" name="color" placeholder="Color" required style="padding: 0.5rem;">
+
+    <button class="btn" type="submit" style="padding: 0.5rem 1rem;">Add Clothing Item</button>
   </form>
-  
+</div>
+
+<div style="text-align: center; margin-bottom: 2rem;">
+  <form action="/delete-clothing" method="POST" style="display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem;">
+    <input type="hidden" name="userId" value="<%= userId %>">
+    <input type="text" name="name" placeholder="Name of item to delete" required style="padding: 0.5rem;">
+    <button class="btn" type="submit" style="padding: 0.5rem 1rem;">Delete Clothing Item</button>
+  </form>
+</div>
+
+<div style="text-align: center; margin-bottom: 2rem;">
+  <form action="/search-clothing" method="POST" style="display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem;">
+    <input type="hidden" name="userId" value="<%= userId %>">
+    <input type="text" name="keyword" placeholder="Search your clothes..." required style="padding: 0.5rem;">
+    <button class="btn" type="submit" style="padding: 0.5rem 1rem;">Search</button>
+  </form>
+</div>
 
   <% if (error) { %>
     <p style="color: red;"><%= error %></p>
@@ -93,6 +123,11 @@
       <% }) %>
     </ul>
   <% } %>
+
+  <% if (success) { %>
+    <p style="color: green;"><%= success %></p>
+  <% } %>
+  
 
   <div class="bottom-right">
     <form action="/dashboard" method="GET">

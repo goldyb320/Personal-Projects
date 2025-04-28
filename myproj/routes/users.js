@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
+//gets acc
 router.post('/get', (req, res) => {
   const userId = req.body.userId;
 
@@ -18,6 +19,7 @@ router.post('/get', (req, res) => {
   });
 });
 
+//update user loc
 router.post('/update-location', (req, res) =>{
   const {userId, location} = req.body;
 
@@ -37,6 +39,7 @@ router.post('/update-location', (req, res) =>{
   });
 });
 
+//delets acc
 router.post('/delete', (req, res) => {
   const userId = req.body.userId;
 

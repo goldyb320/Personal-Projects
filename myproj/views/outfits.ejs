@@ -54,6 +54,10 @@
 
   <h1>Outfits</h1>
 
+  <% if (popularStyle) { %>
+    <h2 style="text-align: center; color: #10b981;">Your Most Worn Style: <%= popularStyle %></h2>
+  <% } %>  
+
   <% if (typeof error !== 'undefined' && error) { %>
     <p style="color: red;"><%= error %></p>
   <% } else if (outfits.length === 0) { %>
