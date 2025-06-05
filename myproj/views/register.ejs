@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Account</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+    }
+
+    .register-box {
+      background: rgb(208, 208, 208);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 350px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #10b981;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #059669;
+    }
+
+    .error {
+      color: red;
+      margin-top: 0.5rem;
+    }
+
+    .bottom-right {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    .btn-back {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-back:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Create Account</h2>
+
+    <form action="/register" method="POST">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="text" name="firstName" placeholder="First Name" required />
+      <input type="text" name="lastName" placeholder="Last Name" required />
+      <input type="text" name="address" placeholder="Address" required />
+      <input type="text" name="location" placeholder="Location" required />
+      <button type="submit">Create Account</button>
+    </form>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+  </div>
+
+  <div class="bottom-right">
+    <form action="/" method="GET">
+      <button class="btn-back" type="submit">Back</button>
+    </form>
+  </div>
+</body>
+</html>

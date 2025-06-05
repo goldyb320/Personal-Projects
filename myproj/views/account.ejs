@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Account</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+    .top-right {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+    .bottom-right {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+    }
+    .info-box {
+      margin-bottom: 2rem;
+    }
+    .btn {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem 0;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-right">
+    <form action="/" method="GET">
+      <button class="btn" type="submit">Sign Out</button>
+    </form>
+  </div>
+
+  <h1>Account</h1>
+
+  <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } %>
+
+  <% if (user) { %>
+    <div class="info-box">
+      <ul>
+        <li><strong>User ID:</strong> <%= user.userId %></li>
+        <li><strong>Username:</strong> <%= user.username %></li>
+        <li><strong>Password:</strong> <%= user.password %></li>
+        <li><strong>First Name:</strong> <%= user.firstName %></li>
+        <li><strong>Last Name:</strong> <%= user.lastName %></li>
+        <li><strong>Address:</strong> <%= user.address %></li>
+        <li><strong>Location:</strong> <%= user.location %></li>
+      </ul>
+    </div>
+
+    <form action="/update-location" method="POST">
+      <input type="hidden" name="userId" value="<%= user.userId %>" />
+      <label for="location">Update Location:</label>
+      <input type="text" name="location" id="location" required />
+      <button class="btn" type="submit">Change Location</button>
+    </form>
+    
+    <form action="/delete-account" method="POST" onsubmit="return confirm('Are you sure you want to delete this account?');">
+      <input type="hidden" name="userId" value="<%= user.userId %>" />
+      <button class="btn" type="submit" style="background-color: #ef4444;">Delete Account</button>
+    </form>    
+
+  <% } %>
+
+  <div class="bottom-right">
+    <form action="/dashboard" method="GET">
+      <input type="hidden" name="userId" value="<%= user.userId %>" />
+      <button class="btn" type="submit">Dashboard</button>
+    </form>
+  </div>
+
+</body>
+</html>

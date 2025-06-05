@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+
+    .top-right {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem 0;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  .closet-image {
+    width: 250px;
+    height: auto;
+    animation: fadeSlideIn 1s ease-out forwards;
+  }
+
+    .btn:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-right">
+    <form action="/" method="GET">
+      <button class="btn" type="submit">Sign Out</button>
+    </form>
+  </div>
+
+  <h1 style="text-align: center;">Welcome to ClimaCloset</h1>
+
+  <div class="nav-buttons">
+    <form action="/clothing" method="GET">
+      <input type="hidden" name="userId" value="<%= userId %>" />
+      <button class="btn" type="submit">Clothing Items</button>
+    </form>
+  
+    <form action="/outfits" method="GET">
+      <input type="hidden" name="userId" value="<%= userId %>" />
+      <button class="btn" type="submit">Outfits</button>
+    </form>
+
+    <form action="/restaurants" method="GET">
+      <input type="hidden" name="userId" value="<%= userId %>">
+      <button class="btn" type="submit">Restaurants</button>
+    </form> 
+  
+    <form action="/account" method="GET">
+      <input type="hidden" name="userId" value="<%= userId %>" />
+      <button class="btn" type="submit">Account</button>
+    </form>   
+  </div>
+
+  <% if (weatherInfo) { %>
+    <p style="text-align: center; font-size: 1.2rem; margin-top: 2rem;"><%= weatherInfo %></p>
+  <% } %>
+
+  <% if (avgTempInfo) { %>
+    <p style="text-align: center; font-size: 1.2rem; margin-top: 1rem;"><%= avgTempInfo %></p>
+  <% } %>  
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <form action="/recommendation" method="GET">
+      <input type="hidden" name="userId" value="<%= userId %>" />
+      <button class="btn" style="padding: 1rem 2.5rem; font-size: 1.3rem;" type="submit">
+        Recommend an Outfit
+      </button>
+    </form>
+  </div>
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <img src="https://cdn-icons-png.flaticon.com/512/2337/2337984.png" alt="Closet Logo" class="closet-image">
+  </div>  
+
+</body>
+</html>
